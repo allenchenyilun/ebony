@@ -12,7 +12,7 @@ VARIABLES:
         Item item_after
         Logic logic
         Logictree[Condition] Conditions
-        Evaluation Evaluation 
+        Evaluation evaluation 
 
     PRIVATE:
 METHODS:
@@ -21,7 +21,8 @@ METHODS:
 """
 # LOG:
 """
-07/07/2022; Allen Chen; Created the Class, Wrote the Class Description
+07/07/2022; Allen Chen; Created the Class, Wrote the Class Description;
+07/09/2022; Allen Chen; Wrote More Class Description;
 """
 
 class Relationship:
