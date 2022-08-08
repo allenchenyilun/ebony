@@ -3,7 +3,7 @@ from models.item import Item
 from models.relationship import Relationship
 
 apple = Item("apple")
-apple.add_name("apple")
+apple.reference_name("apple")
 apple.add_name("Ringo")
 
 sweet = Item("sweet")

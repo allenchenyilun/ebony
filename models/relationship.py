@@ -29,6 +29,7 @@ METHODS:
 07/07/2022; Allen Chen; Created the Class, Wrote the Class Description;
 07/09/2022; Allen Chen; Wrote More Class Description;
 08/05/2022; Allen Chen; wrote and tested add_condition and to_string;
+08/07/2022; Allen Chen; Updated __init__, add_condition, to_stirngs
 """
 # IMPORTS:
 import pathlib
@@ -48,16 +49,22 @@ class Relationship:
         self.item_after = item_after
         self.logic = logic
         self.condition_exist = False # default: no condition
+        self.conditions = []
     
     def add_condition(self, type, item_before, item_after, logic): # add a condition to relationship
-        self.condition = Condition(type, item_before, item_after, logic)
-        self.condition_exist = True # now there is a condition
+        for condition in self.conditions:
+            # check for duplicate condtion
+            if condition.item_before == item_before and condition.type == type and condition.item_after == item_after and condition.logic == logic:
+                raise Exception("class 'Relationship' add_condition failed: condition already exist")
+        if not self.condition_exist:
+            self.condition_exist = True
+        self.conditions.append(Condition(type, item_before, item_after, logic))
     
     def to_string(self, show_condition): # convert relationship to string
+        conditions_text = ""
+        # TODO: solve the trim part of the conditions text output.
         if show_condition == True:
             if self.condition_exist == True:
-                return  self.item_before.name + " " + self.logic + " " + self.item_after.name + " " + self.condition.to_string()
-            else:
-                raise Exception("request failed: condition does not exist")
-        else:
-            return self.item_before.name + " " + self.logic + " " + self.item_after.name
+                for condition in self.conditions:
+                    conditions_text = conditions_text + condition.to_string() + ", and "
+        return self.item_before.name + " " + self.logic + " " + self.item_after.name + " " + conditions_text
